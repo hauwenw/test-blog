@@ -5,8 +5,7 @@ from __future__ import unicode_literals
 from django.views.generic import DetailView, ListView
 from .models import Post, Comment
 from datetime import datetime
-from django.shortcuts import redirect, render
-from django.contrib import auth
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 
