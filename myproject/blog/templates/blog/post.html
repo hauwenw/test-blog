@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Post {{ post.id }}</title>
-</head>
-<body>
+{% extends 'blog/layout.html' %}
+
+{% block body %}
     <h1>{{ post.title }}</h1>
     <h3>{{ post.posted_at }}</h3>
     <p>{{ post.content }}</p>
@@ -21,5 +17,4 @@
         <input type="text" name="content" placeholder="write some comment">
         <button type="submit">submit</button>
     </form>
-</body>
-</html>
+{% endblock %}

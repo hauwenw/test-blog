@@ -1,24 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to blog</title>
-</head>
-<body>
-    <h1>Example Blog Website</h1>
-    <!-- post post form -->
-    <ul>
-        {% for p in post_list %}
-        <li><a href="{% url 'post' pk=p.id %}">{{ p.title }}</a></li>
-        {% endfor %}
-    </ul>
-    <p>Write a new post...</p>
-    <input type="text" form="post-input" name="title" placeholder="title"><br>
-    <textarea form="post-input" name="content" wrap="soft" placeholder="content"></textarea>
-    <form id="post-input" method="POST" action="{% url 'post-post' %}">
-        {% csrf_token %}
-        <button type="submit">submit</button>
-    </form>
+{% extends 'blog/layout.html' %}
 
-</body>
-</html>
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Post List</h1>
+        </div>
+    </div>
+    {% for p in post_list %}
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card" style="border:none;">
+                    <div class="card-block">
+                        <h4 class="card-title">{{ p.title }}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ p.posted_at }}</h6>
+                        <p class="card-text">{{ p.content }}</p>
+                        <a href="{% url 'post' pk=p.id %}" class="btn btn-primary">View Detail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                Write a new post
+              </div>
+              <div class="card-block">
+                  <form id="post-input" method="POST" action="{% url 'post-post' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="post-title">Title</label>
+                        <input type="text" class="form-control" name="title" id="post-title">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-content">Content</label>
+                        <textarea class="form-control" id="post-content" rows="3" name="content"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">submit</button>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+
 from django.views.generic import DetailView, ListView
 from .models import Post, Comment
 from datetime import datetime
 from django.shortcuts import redirect
-from django.http import HttpResponse
 
 # Create your views here.
 
