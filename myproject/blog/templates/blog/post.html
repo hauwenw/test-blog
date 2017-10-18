@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post {{ post.id }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <h3>{{ post.posted_at }}</h3>
+    <p>{{ post.content }}</p>
+    {% with comments=post.comment_set.all %}
+    {% for c in comments %}
+        <p>{{ c.content }} -- {{ c.created_at }}</p>
+    {% endfor %}
+    {% if not comments %}
+        <p>No comments yet.</p><br>
+    {% endif %}
+    {% endwith %}
+    <form method="POST" action="{% url 'post-comment' pk=post.id %}">
+        {% csrf_token %}
+        <input type="text" name="content" placeholder="write some comment">
+        <button type="submit">submit</button>
+    </form>
+</body>
+</html>
