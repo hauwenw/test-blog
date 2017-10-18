@@ -1,20 +1,34 @@
 {% extends 'blog/layout.html' %}
 
 {% block body %}
-    <h1>{{ post.title }}</h1>
-    <h3>{{ post.posted_at }}</h3>
-    <p>{{ post.content }}</p>
+    <div class="card" style="border:none;">
+      <div class="card-block">
+        <h4 class="card-title">{{ post.title }}</h4>
+        <h6 class="card-subtitle mb-2 text-muted">{{ post.posted_at }}</h6>
+        <p class="card-text">{{ post.content }}</p>
+      </div>
+    </div>
+    <hr>
     {% with comments=post.comment_set.all %}
     {% for c in comments %}
-        <p>{{ c.content }} -- {{ c.created_at }}</p>
+        <div class="card">
+          <div class="card-block">
+            <p class="card-text">{{ c.content }}</p>
+            <h6 class="card-subtitle mb-2 text-muted">{{ c.created_at }}</h6>
+          </div>
+        </div>
     {% endfor %}
     {% if not comments %}
-        <p>No comments yet.</p><br>
+        <div class="card">
+          <div class="card-block">
+            <p class="card-text">No comments yet.</p>
+          </div>
+        </div>
     {% endif %}
     {% endwith %}
-    <form method="POST" action="{% url 'post-comment' pk=post.id %}">
+    <form class="form-inline" method="POST" action="{% url 'post-comment' pk=post.id %}">
         {% csrf_token %}
-        <input type="text" name="content" placeholder="write some comment">
-        <button type="submit">submit</button>
+        <input class="form-control" type="text" name="content" placeholder="write some comment">
+        <button class="btn btn-primary" type="submit">submit</button>
     </form>
 {% endblock %}

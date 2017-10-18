@@ -13,7 +13,9 @@ from django.shortcuts import redirect
 class IndexView(ListView):
     model = Post
     template_name = 'blog/index.html'
-    queryset = Post.objects.filter(posted_at__lte=datetime.now()).order_by('-posted_at')
+
+    def get_queryset(self):
+        return Post.objects.filter(posted_at__lte=datetime.now()).order_by('-posted_at')
 
 
 class PostView(DetailView):
