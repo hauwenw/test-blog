@@ -1,26 +1,20 @@
 {% extends 'blog/layout.html' %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>Post List</h1>
-        </div>
-    </div>
     {% for p in post_list %}
-        <hr>
         <div class="row">
             <div class="col-sm-12">
                 <div class="card" style="border:none;">
                     <div class="card-block">
                         <h4 class="card-title">{{ p.title }}</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ p.posted_at }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ p.author.username }} -- {{ p.posted_at }}</h6>
                         <p class="card-text">{{ p.content }}</p>
                         <a href="{% url 'post' pk=p.id %}" class="btn btn-primary">View Detail</a>
                     </div>
                 </div>
             </div>
         </div>
-
+        <hr>
     {% endfor %}
 
     <div class="row">
