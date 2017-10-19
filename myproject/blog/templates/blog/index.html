@@ -7,7 +7,7 @@
                 <div class="card" style="border:none;">
                     <div class="card-block">
                         <h4 class="card-title">{{ p.title }}</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ p.author.username }} -- {{ p.posted_at }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ p.author.username }} -- {{ p.posted_at|date:"D d M Y" }}</h6>
                         <p class="card-text">{{ p.content }}</p>
                         <a href="{% url 'post' pk=p.id %}" class="btn btn-primary">View Detail</a>
                     </div>
@@ -16,7 +16,6 @@
         </div>
         <hr>
     {% endfor %}
-
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
